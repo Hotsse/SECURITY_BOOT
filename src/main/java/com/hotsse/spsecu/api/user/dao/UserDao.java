@@ -17,4 +17,8 @@ public class UserDao extends BaseDao {
 		
 		return this.sqlSession.selectOne("user.getUser", param);
 	}
+	
+	public int insertUser(UserVO user) {
+		return this.sqlSession.insert("user.insertUser", user);
+	}
 }

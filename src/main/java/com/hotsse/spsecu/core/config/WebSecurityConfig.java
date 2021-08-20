@@ -23,10 +23,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		http
 			.authorizeRequests()
 				.antMatchers("/test_db/**").permitAll()
+				.antMatchers("/user/**").permitAll()
 				.anyRequest().authenticated()
 				.and()
 			.formLogin()
-				.loginPage("/login")
+				.loginPage("/user/login")
+				.loginProcessingUrl("/user/login")
 				.defaultSuccessUrl("/hello")
 				.permitAll()
 				.and()
