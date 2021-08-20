@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="user">
+
+	<!-- 회원 정보 조회 -->
+	<select id="getUser" parameterType="map" resultType="UserVO">
+		SELECT username
+			, password
+			, nickname
+		FROM user
+		WHERE use_yn = 'Y'
+			AND username = #{username}
+	</select>
+
+	<!-- 회원가입 -->
+	<insert id="insertUser" parameterType="UserVO">
+		INSERT INTO user (
+			username
+			, password
+			, nickname
+			, use_yn
+		)
+		VALUES (
+			#{username}
+			, #{password}
+			, #{nickname}
+			, 'Y'
+		)
+	</insert>
+	
+	<!-- 회원탈퇴 -->
+	<update id="deleteUser" parameterType="map">
+		UPDATE user
+		SET use_yn = 'N'
+		WHERE username = #{username}
+	</update>
+	
+</mapper>
