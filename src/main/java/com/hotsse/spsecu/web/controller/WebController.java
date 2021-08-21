@@ -1,6 +1,7 @@
 package com.hotsse.spsecu.web.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -57,18 +58,18 @@ public class WebController {
 		SecurityUser user = (SecurityUser) auth.getPrincipal();
 		model.addAttribute("nickname", user.getNickname());
 		
+		System.out.println("user.auth : " + user.getAuthorities().toString());
+				
 		return "pages/hello";
 	}
 	
 	@PostMapping(value = "/test")
+	@PreAuthorize("hasRole('ROLE_ROOT')")
 	public String test(
 			@RequestParam(name = "test") String test) throws Exception {
 		
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		SecurityUser user = (SecurityUser) auth.getPrincipal();
-		
 		System.out.println("test : " + test);
-		System.out.println("user : " + user.toString());
+		
 		return "redirect:/hello";
 	}
 }

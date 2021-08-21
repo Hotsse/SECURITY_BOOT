@@ -1,6 +1,7 @@
 package com.hotsse.spsecu.api.user.dao;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Repository;
@@ -20,5 +21,12 @@ public class UserDao extends BaseDao {
 	
 	public int insertUser(UserVO user) {
 		return this.sqlSession.insert("user.insertUser", user);
+	}
+	
+	public List<String> getUserRoles(String username) {
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("username", username);
+		
+		return this.sqlSession.selectList("user.getUserRoles", param);
 	}
 }
