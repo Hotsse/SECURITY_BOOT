@@ -59,4 +59,16 @@ public class WebController {
 		
 		return "pages/hello";
 	}
+	
+	@PostMapping(value = "/test")
+	public String test(
+			@RequestParam(name = "test") String test) throws Exception {
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		SecurityUser user = (SecurityUser) auth.getPrincipal();
+		
+		System.out.println("test : " + test);
+		System.out.println("user : " + user.toString());
+		return "redirect:/hello";
+	}
 }

@@ -33,6 +33,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.permitAll()
 				.and()
 			.logout()
+				.logoutUrl("/user/logout")
+				.logoutSuccessUrl("/user/login")
+				.invalidateHttpSession(true)
 				.permitAll();
 		
 		// H2 연동을 위한 disable 처리
